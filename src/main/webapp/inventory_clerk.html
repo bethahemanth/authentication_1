@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Inventory Clerk</title>
+  <link rel="stylesheet" href="inventory_clerk.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--  <script></script>-->
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="title-text">
+    <div class="title login">
+      Login Form
+    </div>
+    <div class="title signup">
+      Signup Form
+    </div>
+  </div>
+  <div class="form-container">
+    <div class="slide-controls">
+      <input type="radio" name="slide" id="login" checked>
+      <input type="radio" name="slide" id="signup">
+      <label for="login" class="slide login">Login</label>
+      <label for="signup" class="slide signup">Signup</label>
+      <div class="slider-tab"></div>
+    </div>
+    <div class="form-inner">
+      <form action="login.jsp" class="login" target="_self" method="post">
+        <div class="field">
+          <label for="user">Username:</label>
+          <input type="text" placeholder="username" id="user" name="user" required>
+        </div>
+        <br>
+        <div class="field">
+          <label for="pass">Password:</label>
+          <input type="password" placeholder="Password" id="pass" name="pass" required>
+        </div>
+        <br>
+        <div class="pass-link">
+          <a href="#">Forgot password?</a>
+        </div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" value="Login">
+        </div>
+        <div class="signup-link">
+          Not a member? <a href="">Signup now</a>
+        </div>
+      </form>
+      <form action="signup.jsp" target="_self" method="post" onsubmit="return check()">
+        <div class="field">
+          <label for="name">Username:</label>
+          <input type="text" placeholder="Username" name="name" id="name" required>
+        </div><br>
+        <div class="field">
+          <label for="email">Email:</label>
+          <input type="text" placeholder="Email Address" name="email" id="email" required>
+        </div><br>
+        <div class="field">
+          <label for="password">Password:</label>
+          <input type="password" placeholder="Password" name="password" id="password" required>
+        </div><br>
+        <div class="field">
+          <label for="confirm_password">Reenter Password:</label>
+          <input type="password" placeholder="Reenter Password" name="confirm_password" id="confirm_password" required>
+        </div><br>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" value="Signup" onclick="check()">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  const loginText = document.querySelector(".title-text .login");
+  const loginForm = document.querySelector("form.login");
+  const loginBtn = document.querySelector("label.login");
+  const signupBtn = document.querySelector("label.signup");
+  const signupLink = document.querySelector("form .signup-link a");
+  signupBtn.onclick = (()=>{
+    loginForm.style.marginLeft = "-50%";
+    loginText.style.marginLeft = "-50%";
+  });
+  loginBtn.onclick = (()=>{
+    loginForm.style.marginLeft = "0%";
+    loginText.style.marginLeft = "0%";
+  });
+  signupLink.onclick = (()=>{
+    signupBtn.click();
+    return false;
+  });
+  function check() {
+    let y = document.getElementById("email").value;
+    let check = "@gmail.com";
+    let len_check = check.length;
+    let isfound=true;
+    let z = document.getElementById("password").value;
+    let a = document.getElementById("confirm_password").value;
+    let len = y.length;
+    for(let i = len - 1; i >= 0 && len_check>0; i--) {
+      if (y[i] !== check[len_check - 1]) {
+        isfound = false;
+        break;
+      }
+      len_check--;
+    }
+    if (isfound === false) {
+      alert("Email doesn't end with @gmail.com");
+      return false;
+    }
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const digitRegex = /\d/;
+    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
+    if ( !uppercaseRegex.test(z) || !lowercaseRegex.test(z) || !digitRegex.test(z) || !specialCharRegex.test(z)) {
+      alert("Password must meet all criteria:one uppercase letter, one lowercase letter, one digit, and one special character.");
+      return false;
+    }
+    if(z !== a)
+    {
+      alert("password and reenter password both are not same");
+      return false;
+    }
+    }
+</script>
+</body>
+</html>
