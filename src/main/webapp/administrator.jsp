@@ -3,7 +3,7 @@
 <script>
   function showAlert() {
     alert("Invalid credentials" );
-    window.location.href = "inventory_clerk.html";
+    window.location.href = "administrator.html";
   }
 </script>
 
@@ -13,7 +13,7 @@
 
   // Check if username and password match the desired values
   if ("bhavani chandra".equals(user) && "bhavani_chandra".equals(pass)) {
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("administrator_sub.html");
   } else {
     out.println("<script>showAlert();</script>");
   }
